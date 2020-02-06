@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -104,6 +105,19 @@ public class MainActivity extends AppCompatActivity {
 
         String email = mEmailField.getText().toString();
         String password = mPasswordField.getText().toString();
+
+        if(TextUtils.isEmpty(email)){
+            Toast.makeText(this,"Falta ingresar su email",Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if(TextUtils.isEmpty(password)){
+            Toast.makeText(this,"Falta ingresar la contraseña",Toast.LENGTH_LONG).show();
+            return;
+        }
+
+
+
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -130,6 +144,10 @@ public class MainActivity extends AppCompatActivity {
         mensajeref.setValue(msje);
         mensaje.setText("");
 
+    }
+
+    public void signUp(View v){
+        startActivity(new Intent(this,RegisterActivity.class));
     }
 
 
