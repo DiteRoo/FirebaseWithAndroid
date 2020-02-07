@@ -38,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
     private EditText mEmailField, mPasswordField;
     private Button myLoginButton;
 
-    DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference mensajeref = ref.child("mensaje");
     // Initialize Firebase Auth
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -49,9 +47,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        texto = (TextView)findViewById(R.id.textView);
-        mensaje = (EditText) findViewById(R.id.editText);
-        boton = (Button) findViewById(R.id.button);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -85,20 +80,6 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth.addAuthStateListener(mAuthListener);
 
-
-        mensajeref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String text = dataSnapshot.getValue().toString();
-                texto.setText(text);
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
     }
 
     private void LogearUsuario(){
@@ -139,12 +120,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void modificar(View view){
-        String msje = mensaje.getText().toString();
-        mensajeref.setValue(msje);
-        mensaje.setText("");
-
-    }
 
     public void signUp(View v){
         startActivity(new Intent(this,RegisterActivity.class));
