@@ -2,4 +2,5 @@
 
     <string name="facebook_app_id">2473839092832678</string>
     <string name="app_name">Login</string>
+    <string name="googleClientId">lola</string>
 </resources>
